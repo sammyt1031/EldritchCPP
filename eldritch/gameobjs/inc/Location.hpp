@@ -1,10 +1,11 @@
 #ifndef LOCATION_HPP
 #define LOCATION_HPP
 
+#include <memory>
 #include <vector>
+#include <string>
 
 class Path;
-//class Monster;
 class Clue;
 enum class LocationType;
 
@@ -16,14 +17,15 @@ public:
     explicit Location( const std::string& id, LocationType type );
     const std::string& getId(void) const;
     LocationType getType(void) const;
-    void addPath(std::shared_path<Path>& path);
+    void addPath(std::shared_ptr<Path>& path);
+	void setClue(std::unique_ptr<Clue>& clue);
     
 private:
     
     const std::string id_;
     const LocationType type_;
     
-    std::vector< const std::shared_path<Path> > paths;
+    std::vector< std::shared_ptr<Path> > paths;
     //std::vector< std::unique_ptr<Hero> > heroes;
     //std::vector< std::unique_ptr<Monster> > monsters;
     std::unique_ptr<Clue> clue_;

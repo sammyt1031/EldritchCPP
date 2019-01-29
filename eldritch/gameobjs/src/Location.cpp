@@ -24,7 +24,7 @@ LocationType Location::getType(void) const
     return this->type_; 
 }
 
-void addPath(std::shared_ptr<Path>& path)
+void Location::addPath(std::shared_ptr<Path>& path)
 {
     this->paths.push_back(path);
 }

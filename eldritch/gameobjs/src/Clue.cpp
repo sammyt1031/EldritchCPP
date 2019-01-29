@@ -5,7 +5,7 @@ Clue::Clue(Location& loc)
 : loc(loc)
 {}
 
-Location& getLoc(void)
+Location& Clue::getLoc(void)
 {
     return this->loc;
 }

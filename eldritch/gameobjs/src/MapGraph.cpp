@@ -10,7 +10,7 @@ MapGraph::MapGraph() {}
 
 void MapGraph::addLoc(std::shared_ptr<Location>& loc)
 {
-    this->map[loc->getId()] = std::make_shared(loc);
+    this->map[loc->getId()] = loc;
 }
 
 std::shared_ptr<Location>& MapGraph::getLocation( const std::string& id ) const 

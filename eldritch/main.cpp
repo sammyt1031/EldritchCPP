@@ -1,4 +1,3 @@
-#include "Location.hpp"
 #include "LocationType.hpp"
 #include "MapGraph.hpp"
 
@@ -8,7 +7,7 @@ int main()
 {
     
     
-    auto loc(std::make_shared<Location>( "Shanghai", LocationType.CITY ));
+    auto loc(std::make_shared<Location>( "Shanghai", LocationType::CITY ));
     auto mapgraph = MapGraph();
     mapgraph.addLoc(loc);
     
