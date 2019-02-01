@@ -9,6 +9,8 @@ Location::Location( const std::string& id, LocationType type )
     clue_(nullptr)
 {}
 
+Location::~Location(void) = default;
+
 void Location::setClue( std::unique_ptr<Clue>& clue )
 { 
     this->clue_ = std::move(clue);

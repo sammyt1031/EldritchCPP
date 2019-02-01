@@ -8,20 +8,20 @@ locs_{ loc1, loc2 },
 type_(type)
 {}
 
-std::weak_ptr<Location>& Path::getDest( std::shared_ptr<Location>& from ) const
+std::shared_ptr<Location> Path::getDest( std::shared_ptr<Location>& from ) const
 {
-    if (this->locs_[0] == from)
+    if (this->locs_[0].lock() == from)
     {
-        return this->locs_[1];
-    } else if (this->locs_[1] == from)
+        return this->locs_[1].lock();
+    } else if (this->locs_[1].lock() == from)
     {
-        return this->locs_[0];
+        return this->locs_[0].lock();
     }
     
     throw std::out_of_range("Location " + from->getId() + " is not on this path");
 }
 
-PathType Path::getPathType(void) const
+PathType Path::getPathType(void) const noexcept
 {
     return this->type_;
 }

@@ -1,25 +1,17 @@
-PROG = eldritch
-CXX = g++
-CXXFLAGS = -g -Wall
-LDFLAGS = -Lgame_objs
+MAKE_INC = ${shell pwd}/gen_make.mk
 
-CURR_DIR = ${shell pwd}
+LDFLAGS = -Lmain -Lgame_objs
 
-INC = -I${CURR_DIR}/gameobjs/inc
-SRCS = ${wildcard *.cpp}
-OBJS = ${SRCS:.cpp=.o}
-DEPS = ${OBJS:.o=.hpp}
-BUILD_DIR = ${CURR_DIR}/../build
+INC = -Iinc -Igameobjs/inc -Iresrces/inc
 
-.cpp.o:
-	${CXX} ${CXXFLAGS} -c $<
-	mv $@ build
+all: main game_objs
+	g++ ${LDFLAGS} -o $@ $^
 
-${PROG}: ${OBJS}
-	${CXX} ${LDFLAGS} ${INC} -o $@ $^ ${OBJS}
+main:
+	cd main; ${MAKE} "INC=${INC}" "MAKE_INC=${MAKE_INC}"
 
 game_objs:
-	cd gameobjs/src; ${MAKE} all "INC=${INC}"
+	cd gameobjs; ${MAKE} "INC=${INC}" "MAKE_INC=${MAKE_INC}"
 
 .PHONY: clean
 clean:

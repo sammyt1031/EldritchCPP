@@ -13,7 +13,7 @@ class Path
 public:
     
     explicit Path( std::shared_ptr<Location>& loc1, std::shared_ptr<Location>& loc2, PathType type);
-    std::weak_ptr<Location>& getDest( std::shared_ptr<Location>& source_loc ) const;
+    std::shared_ptr<Location> getDest( std::shared_ptr<Location>& source_loc ) const;
     PathType getPathType(void) const noexcept;
     
 private:
@@ -23,6 +23,6 @@ private:
     
     Path(const Path& other);
 
-}
+};
 
 #endif // PATH_HPP

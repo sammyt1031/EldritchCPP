@@ -1,9 +1,10 @@
+#pragma once
 #ifndef LOCATION_HPP
 #define LOCATION_HPP
 
+#include <string>
 #include <memory>
 #include <vector>
-#include <string>
 
 class Path;
 class Clue;
@@ -14,7 +15,9 @@ class Location
 
 public:
     
-    explicit Location( const std::string& id, LocationType type );
+    explicit Location(const std::string& id, LocationType type);
+    virtual ~Location(void);
+    
     const std::string& getId(void) const;
     LocationType getType(void) const;
     void addPath(std::shared_ptr<Path>& path);

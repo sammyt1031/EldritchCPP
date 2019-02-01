@@ -1,3 +1,4 @@
+#include "Location.hpp"
 #include "LocationType.hpp"
 #include "MapGraph.hpp"
 
