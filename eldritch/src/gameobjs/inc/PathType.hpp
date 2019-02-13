@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PATH_TYPE_HPP
 #define PATH_TYPE_HPP
 

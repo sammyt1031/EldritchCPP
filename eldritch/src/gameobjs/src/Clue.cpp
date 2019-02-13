@@ -2,11 +2,11 @@
 #include "Location.hpp"
 
 Clue::Clue(Location& loc)
-: loc(loc)
+: loc_(loc)
 {}
 
 Location& Clue::getLoc(void)
 {
-    return this->loc;
+    return this->loc_;
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CLUE_HPP
 #define CLUE_HPP
 
@@ -13,7 +14,10 @@ public:
 
 private:
     
-    Location& loc;
+    Location& loc_;
+    
+    Clue(const Clue&);
+    Clue& operator=(const Clue&);
     
 };
 
