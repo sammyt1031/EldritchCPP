@@ -1,3 +1,4 @@
+#pragma once
 #ifndef SHUFFLABLE_HPP
 #define SHUFFLABLE_HPP
 
@@ -10,11 +11,11 @@ class Shufflable {
     
 public:
     
-    explicit Shufflable (std::vector<T>& other_vec, unsigned seed = std::chrono::system_clock::now().time_since_epoch().count());
+    explicit Shufflable (std::vector< std::unique_ptr<T> >& other_vec, unsigned seed = std::chrono::system_clock::now().time_since_epoch().count());
     
-    T& draw(void);
+    std::unique_ptr<T> draw(void);
     
-    void discard(T& item);
+    void discard(std::unique_ptr<T> item);
     
     void shuffle(void);
     
@@ -24,11 +25,11 @@ public:
 
 private:
     
-    std::vector<T> container;
+    std::vector< std::unique_ptr<T> > container;
     std::default_random_engine rand_gen;
     
-    typename std::vector<T>::iterator draw_it;
-    typename std::vector<T>::iterator disc_it;
+    typename std::vector< std::unique_ptr<T> >::iterator draw_it;
+    typename std::vector< std::unique_ptr<T> >::iterator disc_it;
     
     Shufflable(const Shufflable&);
     Shufflable& operator=(const Shufflable&);
@@ -42,16 +43,17 @@ private:
 #include <iostream>
 
 template<typename T>
-Shufflable<T>::Shufflable (std::vector<T>& other_vec, unsigned seed)
+Shufflable<T>::Shufflable (std::vector< std::unique_ptr<T> >& other_vec, unsigned seed)
 :
     container(std::move(other_vec)),
     rand_gen(seed),
-    draw_it(container.begin()),
-    disc_it(container.begin())
-{}
+{
+    this->draw_it = container.begin();
+    this->disc_it = container.begin();
+}
         
 template<typename T>
-T& Shufflable<T>::draw(void)
+std::unique_ptr<T> Shufflable<T>::draw(void)
 {
     if (this->draw_it == this->container.end())
     {
@@ -61,11 +63,11 @@ T& Shufflable<T>::draw(void)
     auto& item(*this->draw_it);
     ++this->draw_it;
     
-    return item;
+    return std::move(item);
 }
 
 template<typename T>
-void Shufflable<T>::discard(T& item)
+void Shufflable<T>::discard(std::unique_ptr<T> item)
 {
     if (this->disc_it == this->draw_it)
     {

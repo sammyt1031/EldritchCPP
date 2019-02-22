@@ -21,6 +21,12 @@ public:
     int getStr(void) const noexcept;
     int getWill(void) const noexcept;
     
+    int impLore(void) noexcept;
+    int impInf(void) noexcept;
+    int impObs(void) noexcept;
+    int impStr(void) noexcept;
+    int impWill(void) noexcept;
+    
     void goInsane(void);
     virtual void die(void);
     
@@ -39,8 +45,6 @@ private:
     int obs_mod_;
     int str_mod_;
     int will_mod_;
-    
-    std::weak_ptr<Location> loc_;
     
     Hero(const Hero&);
     Hero& operator=(const Hero&);

@@ -3,7 +3,6 @@
 #define CREATURE_HPP
 
 #include <string>
-#include <memory>
 
 class Location;
 
@@ -12,12 +11,14 @@ class Creature
 
 public:
     
-    explicit Creature(const std::string& name, int health);
-    explicit Creature(const Creature& other);
-    
     void takeDamage(int damage);
+    void setLoc(Location& loc) noexcept;
+    
+    virtual void die(void);
 
-    virtual void die(void) = 0;
+protected:
+
+    Creature(const std::string& name, int health);
     
 private:
     
@@ -26,8 +27,11 @@ private:
     
     int health_;
 
-    std::weak_ptr<Location> loc_;
+    Location* loc_;
 
+    Creature(const Creature& other);
+    Creature& operator=(const Creature& other);
+    
 };
 
 #endif // CREATURE_HPP
